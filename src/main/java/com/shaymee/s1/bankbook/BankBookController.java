@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class BankBookController {
 	
@@ -117,6 +118,12 @@ public class BankBookController {
 			System.out.println(bankbookDTO.getBookName());
 			
 			request.setAttribute("dto", bankbookDTO); //DTO라는 이름으로 bankbookDTO를 담아서 SETTING하자
+			request.setAttribute("count", 123);
+			request.setAttribute("name", "iu");//Server에서 jsp로 보내는 속성들
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("se", "session");
+			request.setAttribute("se", "request");
 			
 			RequestDispatcher view = request.getRequestDispatcher("../WEB-INF/views/bankbook/bankbookSelect.jsp"); 
 																	  // 인자값로 내가 보여주고싶은 jsp의 경로명을 적어라
