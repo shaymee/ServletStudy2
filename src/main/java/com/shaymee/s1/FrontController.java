@@ -3,11 +3,14 @@ package com.shaymee.s1;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.shaymee.s1.bankbook.BankBookController;
 import com.shaymee.s1.member.MemberController;
@@ -38,6 +41,15 @@ public class FrontController extends HttpServlet {
     
     //오버라이딩이라서 header를 바꾸면 안됨
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ServletConfig sc = getServletConfig();
+		
+		HttpSession session =request.getSession();
+		ServletContext context = session.getServletContext();
+		ServletContext context2 = request.getServletContext();
+		
+		context = getServletContext(); //Session에서 안꺼내고 바로 꺼낼 수도 있음
+		
 		System.out.println("Front Controller 실행");
 		String uri = request.getRequestURI();
 //		String url = request.getRequestURL().toString();
