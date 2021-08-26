@@ -16,6 +16,36 @@ public class BankbookDAO {
 		dbConnector = new DBConnector();
 	}
 	
+	//setInsert
+	//DB에 insert하는 코드를 만들어주면 됨
+	public int setInsert(BankbookDTO bankbookDTO) {
+		Connection con = dbConnector.getConnect();
+		PreparedStatement st = null;
+		int result = 0;
+		
+		String sql = "INSERT INTO BANKBOOK (BOOKNUMBER, BOOKNAME, BOOKRATE, BOOKSALE) "
+				+ "	VALUES (bankbook_seq.nextval, ?, ?, ?) ";
+		
+		try {
+			st = con.prepareStatement(sql);
+
+			st.setString(1, bankbookDTO.getBookName());
+			st.setDouble(2, bankbookDTO.getBookRate());
+			st.setInt(3, bankbookDTO.getBookSale());
+			
+			result = st.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dbConnector.disConnect(st, con); //오버로딩 활용	
+		}
+		
+		return result;
+	}
+	
+	
 	
 	public ArrayList<BankbookDTO> getList() {
 		Connection con = dbConnector.getConnect();

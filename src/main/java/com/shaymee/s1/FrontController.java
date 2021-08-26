@@ -35,6 +35,8 @@ public class FrontController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+    
+    //오버라이딩이라서 header를 바꾸면 안됨
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Front Controller 실행");
 		String uri = request.getRequestURI();
@@ -53,7 +55,12 @@ public class FrontController extends HttpServlet {
 		if(path.equals("/bankbook")) {			
 			bc.start(request, response);
 		} else if(path.equals("/member")) {
-			mc.start(request);
+			try {
+				mc.start(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			System.out.println("없는 URL");
 		}

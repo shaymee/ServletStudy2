@@ -39,4 +39,15 @@ public class DBConnector {
 		}
 	}
 	
+	//똑같은 이름으로 똑같은 메서드를 만드는데 매개변수를 다르게해서 만드는 것 ==오버로딩
+	public void disConnect(PreparedStatement st, Connection con) {
+		try {
+			st.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }
